@@ -5,3 +5,7 @@
 
 - config.php          > Bölümüne $config['base_url'] = ''; Ayarla
 - database.php        > Veritabanı Ayarları Yapılacak
+
+
+
+
