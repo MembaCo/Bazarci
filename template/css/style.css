@@ -27997,12 +27997,12 @@ div.tagsinput span.tag a {
 }
 
 .auth.auth-bg-1 {
-  background: url("https://via.placeholder.com/400x400");
+  background: url("../images/login-bg.jpg");
   background-size: cover;
 }
 
 .auth.register-bg-1 {
-  background: url("https://via.placeholder.com/400x400") center center no-repeat;
+  background: url("../images/login-bg.jpg") center center no-repeat;
   background-size: cover;
 }
 
@@ -28270,17 +28270,17 @@ div.tagsinput span.tag a {
 }
 
 .auth.theme-two .banner-section .slide-content.bg-1 {
-  background: url("https://via.placeholder.com/400x400") no-repeat center center;
+  background: url("../images/login-bg.jpg") no-repeat center center;
   background-size: cover;
 }
 
 .auth.theme-two .banner-section .slide-content.bg-2 {
-  background: url("https://via.placeholder.com/400x400") no-repeat center center;
+  background: url("../images/login-bg.jpg") no-repeat center center;
   background-size: cover;
 }
 
 .lock-full-bg {
-  background: url("https://via.placeholder.com/400x400");
+  background: url("../images/login-bg.jpg");
   background-size: cover;
 }
 
