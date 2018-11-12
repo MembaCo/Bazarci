@@ -5,6 +5,7 @@ Güncel Versiyon **1.01**
 Versiyon Geçmişi
 --------
 Versiyon 1.01 - Kullanıcı İşlemleri (Planlanan)
+- Tema Entegrasyon (12-11-2018)
 - Kayıt Sistemi
 - Giriş Sistemi
 - Yetkilendirme Sistemi - Yönetim > Satıcı > Muhasebe > Kullanıcı gibi
