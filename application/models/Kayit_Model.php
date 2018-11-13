@@ -11,8 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Class Kayit_Model
  */
-class Kayit_Model extends CI_Controller
-
+class Kayit_Model extends CI_Model
 {
 
     public function registerUser($username, $email, $first_name, $last_name, $password,

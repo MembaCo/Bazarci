@@ -1,90 +1,134 @@
-<?php
-/**
- * Created by Memba Co. Developer
- * Projct: Bazarci
- * User: Memba Co.
- * Date: 10.11.2018
- * Time: 14:06
- */
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 center-block-e">
 
-$sis_adi	     =  $this->db->get_where('ayar',array('ayar_tip' => 'sis_adi'))->row()->ayar_deger;
-$sis_baslik	     =  $this->db->get_where('ayar',array('ayar_tip' => 'sis_baslik'))->row()->ayar_deger;
 
-$this->load->view('tema/ust');
-?>
 
-<body>
-<div class="container-scroller"><!-- CONTAINER -->
-    <!-- CONTAINER BÖLÜM -->
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
-            <div class="row w-100 mx-auto">
-                <div class="col-lg-4 mx-auto">
-                    <div class="auto-form-wrapper">
-                        <form action="#">
-                            <div class="form-group">
-                                <label class="label">Kullanıcı Adı</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Kullanıcı Adı">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="icon-check"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="label">Şifre</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="*********">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="icon-check"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary submit-btn btn-block">Giriş</button>
-                            </div>
-                            <div class="form-group d-flex justify-content-between">
-                                <div class="form-check form-check-flat mt-0">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" checked>
-                                        Oturumumu Hatırla
-                                    </label>
-                                </div>
-                                <a href="#" class="text-small forgot-password text-black">Şifremi Unuttum</a>
-                            </div>
-                            <div class="form-group">
-                                <del><button class="btn btn-block g-login"><img class="mr-3" src="<?php echo base_url(); ?>template/images/file-icons/icon-google.svg" alt="">Google Hesabım ile Giriş Yap</button></del>
-                                <del><button class="btn btn-block g-login"><img class="mr-3" src="<?php echo base_url(); ?>template/images/file-icons/facebook.png" alt="">Facebook Hesabım ile Giriş Yap</button></del>
-                            </div>
-                            <div class="text-block text-center my-3">
-                                <span class="text-small font-weight-semibold">Henüz Hesabınız Yok mu ?</span>
-                                <a href="<?php echo base_url(); ?>kayit" class="text-black text-small">Yeni Hesap Oluştur</a>
-                            </div>
-                        </form>
+            <div class="login-form">
+
+                <div class="login-form-inner">
+                    <?php $gl = $this->session->flashdata('globalmsg'); ?>
+                    <?php if(!empty($gl)) :?>
+                        <div class="alert alert-success"><b><span class="glyphicon glyphicon-ok"></span></b> <?php echo $this->session->flashdata('globalmsg') ?></div>
+                    <?php endif; ?>
+                    <p class="login-form-intro"><img src="<?php echo base_url() ?>images/ava2.png" width="100"></p>
+                    <?php if(isset($_GET['redirect'])) : ?>
+                        <?php echo form_open(site_url("giris/pro/" . urlencode($_GET['redirect'])), array("id" => "login_form")) ?>
+                    <?php else : ?>
+                        <?php echo form_open(site_url("giris/pro"), array("id" => "login_form")) ?>
+                    <?php endif; ?>
+                    <div class="form-group login-form-area has-feedback">
+                        <input type="text" class="form-control" name="email" placeholder="<?php echo lang("ctn_303") ?>">
+                        <i class="glyphicon glyphicon-user form-control-feedback login-icon-color"></i>
                     </div>
-                    <!--
-                    <ul class="auth-footer">
-                        <li><a href="#">Koşullar</a></li>
-                        <li><a href="#">Yardım</a></li>
-                        <li><a href="#">Koşullar</a></li>
-                    </ul>
-                    <p class="footer-text text-center">Copyright © 2018 <a href="http://www.membaco.com" target="_blank">Memba Co. IT</a>. All rights reserved.</p>
-                    -->
-                </div>
-            </div>
-        </div>
-        <!-- content-wrapper ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-</div>
-<!-- container-scroller -->
-<!-- plugins:js -->
-<script src="<?php echo base_url(); ?>template/vendors/js/vendor.bundle.base.js"></script>
-<script src="<?php echo base_url(); ?>template/vendors/js/vendor.bundle.addons.js"></script>
-<!-- endinject -->
-<!-- inject:js -->
-<script src="<?php echo base_url(); ?>template/js/template.js"></script>
-<!-- endinject -->
-</body>
 
-</html>
+                    <div class="form-group login-form-area has-feedback">
+                        <input type="password" name="pass" class="form-control" placeholder="*********">
+                        <i class="glyphicon glyphicon-lock form-control-feedback login-icon-color"></i>
+                    </div>
+
+                    <p><input type="submit" class="btn btn-flat-login form-control" value="<?php echo lang("ctn_150") ?>"></p>
+                    <p class="decent-margin small-text"><a href="<?php echo site_url("giris/forgotpw") ?>"><?php echo lang("ctn_181") ?></a> <span class="pull-right"><a href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></span></p>
+                </div>
+                <div class="login-form-bottom clearfix">
+                    <?php if(!$this->settings->info->disable_social_login) : ?>
+                        <div class="text-center decent-margin-top">
+                            <?php if(!empty($this->settings->info->twitter_consumer_key) && !empty($this->settings->info->twitter_consumer_secret)) : ?>
+                                <div class="btn-group">
+                                    <a href="<?php echo site_url("giris/twitter_login") ?>" class="btn btn-flat-social-twitter" >
+                                        <img src="<?php echo base_url() ?>images/social/twitter.png" height="20" class='social-icon' />
+                                        Twitter</a>
+                                </div>
+                            <?php endif; ?>
+                            <?php if(!empty($this->settings->info->facebook_app_id) && !empty($this->settings->info->facebook_app_secret)) : ?>
+                                <div class="btn-group">
+                                    <a href="<?php echo site_url("giris/facebook_login") ?>" class="btn btn-flat-social-facebook" >
+                                        <img src="<?php echo base_url() ?>images/social/facebook.png" height="20" class='social-icon' />
+                                        Facebook</a>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if(!empty($this->settings->info->google_client_id) && !empty($this->settings->info->google_client_secret)) : ?>
+                                <div class="btn-group">
+                                    <a href="<?php echo site_url("giris/google_login") ?>" class="btn btn-flat-social-google" >
+                                        <img src="<?php echo base_url() ?>images/social/google.png" height="20" class='social-icon' />
+                                        Google</a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <hr>
+                    <?php echo form_close() ?>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="login-footer">
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var form = "login_form";
+        $('#'+form + ' input').on("focus", function(e) {
+            clearerrors();
+        });
+        $('#'+form).on("submit", function(e) {
+
+            e.preventDefault();
+            // Ajax check
+            var data = $(this).serialize();
+            $.ajax({
+                url : global_base_url + "giris/ajax_check_login",
+                type : 'POST',
+                data : {
+                    formData : data,
+                    '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash() ?>'
+                },
+                dataType: 'JSON',
+                success: function(data) {
+                    if(data.error) {
+                        $('#'+form).prepend('<div class="form-error">'+data.error_msg+'</div>');
+                    }
+                    if(data.success) {
+                        // allow form submit
+                        $('#'+form+ ' input[type="submit"]').val("Logging In ...");
+                        $('#'+form).unbind('submit').submit();
+                    }
+                    if(data.field_errors) {
+                        var errors = data.fieldErrors;
+                        console.log(errors);
+                        for (var property in errors) {
+                            if (errors.hasOwnProperty(property)) {
+                                // Find form name
+                                var field_name = '#' + form + ' input[name="'+property+'"]';
+                                $(field_name).addClass("errorField");
+                                // Get input group of field
+                                $('#'+form).prepend('<div class="form-error">'+errors[property]+'</div>');
+
+
+                            }
+                        }
+                    }
+                }
+            });
+
+            return false;
+
+
+        });
+    });
+
+    function clearerrors()
+    {
+        console.log("Called");
+        $('.form-error').remove();
+        $('.errorField').removeClass('errorField');
+    }
+</script>

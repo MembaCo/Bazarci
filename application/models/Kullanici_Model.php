@@ -12,7 +12,6 @@
  */
 class Kullanici_Model extends CI_Model
 {
-
     public function getUser($email, $pass)
     {
         return $this->db->select("ID")
@@ -548,7 +547,6 @@ class Kullanici_Model extends CI_Model
     {
         $this->db->insert("user_logs", $data);
     }
-
 
 }
 

@@ -80,6 +80,29 @@ $config['language']	= 'turkish';
 
 /*
 |--------------------------------------------------------------------------
+| Available Languages
+|--------------------------------------------------------------------------
+|
+| If you want to add multiple languages, please add them to this array.
+| If your language needs to support Right-To-Left text, set rtl_support to 1
+|
+| Datatable_lang refers to the language file for translating text in the tables
+| you see on the system. Refer to: https://datatables.net/plug-ins/i18n/
+|
+| language_hook refers to the folder name that contains your language files in
+| application/languages/
+|
+*/
+$config['available_languages'] = array(
+    "english" => array(
+        "display_name" => "Turkish",
+        "rtl_support" => 0,
+        "datatable_lang" => ""
+    )
+);
+
+/*
+|--------------------------------------------------------------------------
 | Default Character Set
 |--------------------------------------------------------------------------
 |
