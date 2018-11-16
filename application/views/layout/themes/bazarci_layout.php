@@ -103,7 +103,7 @@
                     </form>
 
                     <ul class="navbar-nav navbar-nav-right mr-0 ml-auto">
-                        <!-- Bildirim --><!-- Bildirm Yoksa Gizle -->buradayız
+                        <!-- Bildirim --><!-- Bildirm Yoksa Gizle -->
                         <?php if($this->user->info->noti_count > 0) : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" onclick="load_notifications()" href="#" data-toggle="dropdown">
@@ -116,23 +116,19 @@
                                     <p class="mb-0 font-weight-medium float-left">
                                         <?php echo lang("ctn_412") ?>
                                     </p>
-                                    <span class="badge badge-pill badge-info float-right"><?php echo $this->user->info->noti_count ?></span>
-                                </a>
-
-                                <!-- Bildirim Scrool -->
+                                    <span class="badge badge-pill badge-info float-right"><?php echo $this->user->info->noti_count ?></span></a>
+                                <!-- Bildirim İçerik-->
                                 <div id="notifications-scroll" >
                                     <div id="ajspinner_notification">
                                         <span class="glyphicon glyphicon-refresh" id="ajspinner_notification"></span>
                                     </div>
                                 </div>
-                                <!-- Bildirim İçerik -->
-
+                                <!-- Bildirim Alt -->
                                 <div class="preview-item-content">
                                     <p class="font-weight-light">
                                         <center><a href="<?php echo site_url("arkaofis/bildirimler") ?>"><?php echo lang("ctn_414") ?></a></center>
                                     </p>
                                 </div>
-
                             </div>
                         </li>
                         <?php endif; ?>
