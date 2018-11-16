@@ -54,5 +54,4 @@ class Kurulum_Model extends CI_Controller
         }
     }
 }
-
 ?>

@@ -30,7 +30,7 @@ class Giris extends CI_Controller
 
     public function index()
     {
-        $this->template->set_page_title("Login");
+        $this->template->set_page_title("Giriş");
         $this->template->set_error_view("error/login_error.php");
         $this->template->set_layout("layout/login_layout.php");
         if ($this->Kullanici_Model->check_block_ip()) {
@@ -102,7 +102,7 @@ class Giris extends CI_Controller
         {
             if(!$r->active) {
                 $this->template->jsonError(lang("error_72") . "<a href='".
-                    site_url("register/send_activation_code/" . $r->ID . "/" .
+                    site_url("kayit/send_activation_code/" . $r->ID . "/" .
                         urlencode($r->email)).
                     "'>".lang("error_73") ."</a> " . lang("error_74"));
             }
@@ -171,7 +171,7 @@ class Giris extends CI_Controller
         {
             if(!$r->active) {
                 $this->template->error(lang("error_72") . "<a href='".
-                    site_url("register/send_activation_code/" . $r->ID . "/" .
+                    site_url("kayit/send_activation_code/" . $r->ID . "/" .
                         urlencode($r->email)).
                     "'>".lang("error_73") ."</a> " . lang("error_74"));
             }
@@ -278,7 +278,7 @@ class Giris extends CI_Controller
         $client->setApplicationName('framework');
         $client->setClientId($this->settings->info->google_client_id);
         $client->setClientSecret($this->settings->info->google_client_secret);
-        $client->setRedirectUri(site_url("login/google_login"));
+        $client->setRedirectUri(site_url("giris/google_login"));
         $client->setScopes(array(
                 'https://www.googleapis.com/auth/plus.login',
                 'https://www.googleapis.com/auth/plus.me',
@@ -294,7 +294,7 @@ class Giris extends CI_Controller
         if (isset($_GET['code'])) {
             $client->authenticate($_GET['code']);
             $_SESSION['google_token'] = $client->getAccessToken();
-            $redirect = redirect(site_url("login/google_login"));
+            $redirect = redirect(site_url("giris/google_login"));
             header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
             return;
         }
@@ -382,7 +382,7 @@ class Giris extends CI_Controller
 
         $helper = $fb->getRedirectLoginHelper();
         $permissions = ['email', 'user_likes']; // optional
-        $loginUrl = $helper->getLoginUrl(site_url("login/facebook_login_pro"));
+        $loginUrl = $helper->getLoginUrl(site_url("giris/facebook_login_pro"));
 
         redirect($loginUrl);
     }
@@ -412,7 +412,7 @@ class Giris extends CI_Controller
 
         $helper = $fb->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken(site_url("login/facebook_login_pro"));
+            $accessToken = $helper->getAccessToken(site_url("giris/facebook_login_pro"));
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -515,7 +515,7 @@ class Giris extends CI_Controller
 
         // We redirect the user to this url once we have our tokens
         $request_token = $twitteroauth->oauth("oauth/request_token",
-            array("oauth_callback" => site_url("login/twitter_login_pro")));
+            array("oauth_callback" => site_url("giris/twitter_login_pro")));
 
         // On Success
         if ($twitteroauth->getLastHttpCode() ==200){
@@ -653,11 +653,11 @@ class Giris extends CI_Controller
             redirect(site_url());
         } else {
             $this->template->error(lang("error_41"));
-            redirect(site_url("login/twitter_login"));
+            redirect(site_url("giris/twitter_login"));
         }
     }
 
-    public function logout($hash)
+    public function cikis($hash)
     {
         $this->template->set_error_view("error/login_error.php");
         $config = $this->config->item("cookieprefix");
@@ -700,13 +700,12 @@ class Giris extends CI_Controller
             $this->template->error(lang("error_43"));
         }
 
-        $this->template->loadContent("login/resetpw.php",
+        $this->template->loadContent("giris/resetpw.php",
             array(
                 "token" => $token,
                 "userid" => $userid
             )
         );
-
     }
 
     public function resetpw_pro($token, $userid)
@@ -751,7 +750,7 @@ class Giris extends CI_Controller
     {
         $this->template->set_error_view("error/login_error.php");
         $this->template->set_layout("layout/login_layout.php");
-        $this->template->loadContent("login/forgotpw.php", array());
+        $this->template->loadContent("giris/forgotpw.php", array());
     }
 
     public function forgotpw_pro()
@@ -807,7 +806,7 @@ class Giris extends CI_Controller
             "[NAME]" => $user->username,
             "[SITE_URL]" => site_url(),
             "[EMAIL_LINK]" =>
-                site_url("login/resetpw/" . $token . "/" . $user->ID),
+                site_url("giris/resetpw/" . $token . "/" . $user->ID),
             "[SITE_NAME]" =>  $this->settings->info->site_name
         ),
             $email_template->message);
@@ -816,17 +815,15 @@ class Giris extends CI_Controller
             $email_template->message, $email);
 
         $this->session->set_flashdata("globalmsg", lang("success_19"));
-        redirect(site_url("login/forgotpw"));
+        redirect(site_url("giris/forgotpw"));
     }
 
     public function banned()
     {
         $this->template->set_error_view("error/login_error.php");
         $this->template->set_layout("layout/login_layout.php");
-        $this->template->loadContent("login/banned.php", array());
+        $this->template->loadContent("giris/banned.php", array());
     }
-
-
 }
 
 ?>

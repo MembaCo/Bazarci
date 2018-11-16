@@ -123,7 +123,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,7 +244,7 @@ $config['allow_get_array'] = TRUE;
 |
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
-|
+| ToDo: Loglar Kapatılacak
 */
 $config['log_threshold'] = 4;
 
@@ -345,9 +345,9 @@ $config['cache_query_string'] = FALSE;
 | See the user guide for more info.
 |
 | https://codeigniter.com/user_guide/libraries/encryption.html
-|
+|ToDo: Değiştirilecek
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'dc9fe4e2492b37c4fac022b06ebcd73247e5ffed6faadd340163b55f225637c55cdf3d48377301b020888069236e0ffc849570504297';
 
 /*
 |--------------------------------------------------------------------------
@@ -400,13 +400,25 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Cookie Prefix
+|--------------------------------------------------------------------------
+|
+| Used to prefix all cookie names.
+|
+*/
+
+$config['cookieprefix'] = "bazarci_";
+
 
 /*
 |--------------------------------------------------------------------------
@@ -423,7 +435,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= 'bazarci';
+$config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
@@ -471,12 +483,12 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_bazarci';
+$config['csrf_cookie_name'] = 'csrf_bazarci_mc';
 $config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_regenerate'] = FALSE;
+$config['csrf_exclude_uris'] = array('invoice/view', 'ipn/process2', 'funds', 'ipn/stripe/[0-9]+','ipn/checkout2/[0-9]+');
 
 /*
 |--------------------------------------------------------------------------

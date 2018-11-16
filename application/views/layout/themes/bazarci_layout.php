@@ -146,7 +146,8 @@
                                     <?php echo lang("ctn_156") ?>
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="<?php echo base_url("giris/logout/" . $this->security->get_csrf_hash()) ?>" class="dropdown-item">
+                                <!-- ToDo: Çıkışta csrf_hash kodu gelmıyor Girişte Sorun var çerezler ile alakalı-->
+                                <a href="<?php echo site_url("giris/cikis/" . $this->security->get_csrf_hash()) ?>" class="dropdown-item">
                                     <i class="icon-logout text-primary mr-2"></i>
                                     <?php echo lang("ctn_149") ?>
                                 </a>

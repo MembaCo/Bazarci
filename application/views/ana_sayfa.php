@@ -81,8 +81,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
         <p>Ana Sayfamız Burası</p>
+        <p><?php echo site_url("giris/cikis/" . $this->security->get_csrf_hash()) ?></p>
+        <p>*-----*</p>
         <li><a href="<?php echo base_url() ?>"><?php echo lang("ctn_2") ?></a></li>
         <li><a href="<?php echo base_url('arkaofis/index') ?>"><?php echo lang("ctn_1") ?></a></li>
+        <li><a href="<?php echo base_url('giris') ?>">Giriş</a></li>
     </div>
 
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

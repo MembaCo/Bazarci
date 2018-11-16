@@ -27,8 +27,6 @@ class Para_Model extends CI_Model
     {
         $this->db->where("ID", $id)->update("payment_plans", $data);
     }
-
-
 }
 
 ?>

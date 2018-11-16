@@ -6,7 +6,8 @@ class Settings
 
 	var $info=array();
 
-	var $version = "1.9";
+	// ToDo: Versiyon Değişim
+	var $version = "1.1";
 
 	public function __construct() 
 	{
@@ -29,7 +30,7 @@ class Settings
 		
 		if($site->num_rows() == 0) {
 			$CI->template->error(
-				"You are missing the site settings database row."
+				"Veri tabanındaki site ayarlarında bir sorun algılandı."
 			);
 		} else {
 			$this->info = $site->row();

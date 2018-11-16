@@ -12,7 +12,6 @@
  */
 class Giris_Model extends CI_Model
 {
-
     public function getUser($email, $pass)
     {
         return $this->db->select("ID")
@@ -147,5 +146,4 @@ class Giris_Model extends CI_Model
     }
 
 }
-
 ?>

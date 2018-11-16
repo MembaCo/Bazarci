@@ -547,7 +547,5 @@ class Kullanici_Model extends CI_Model
     {
         $this->db->insert("user_logs", $data);
     }
-
 }
-
 ?>

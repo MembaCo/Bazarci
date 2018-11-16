@@ -28,7 +28,7 @@
                     </div>
 
                     <p><input type="submit" class="btn btn-flat-login form-control" value="<?php echo lang("ctn_150") ?>"></p>
-                    <p class="decent-margin small-text"><a href="<?php echo site_url("giris/forgotpw") ?>"><?php echo lang("ctn_181") ?></a> <span class="pull-right"><a href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></span></p>
+                    <p class="decent-margin small-text"><a href="<?php echo site_url("giris/forgotpw") ?>"><?php echo lang("ctn_181") ?></a> <span class="pull-right"><a href="<?php echo site_url("kayit") ?>"><?php echo lang("ctn_151") ?></a></span></p>
                 </div>
                 <div class="login-form-bottom clearfix">
                     <?php if(!$this->settings->info->disable_social_login) : ?>
@@ -98,7 +98,7 @@
                     }
                     if(data.success) {
                         // allow form submit
-                        $('#'+form+ ' input[type="submit"]').val("Logging In ...");
+                        $('#'+form+ ' input[type="submit"]').val("Giriş Başarılı. Yönlendiriliyorsunuz ...");
                         $('#'+form).unbind('submit').submit();
                     }
                     if(data.field_errors) {

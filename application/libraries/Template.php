@@ -3,7 +3,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Template
 {
-
 	var $cssincludes;
 	var $sidebar;
 	var $responsive_sidebar;
@@ -128,7 +127,7 @@ class Template
 
 	public function errori($msg) 
 	{
-		echo "ERROR: " . $msg;
+		echo "HATA: " . $msg;
 		exit();
 	}
 
@@ -139,5 +138,4 @@ class Template
 	}
 
 }
-
 ?>
