@@ -31,11 +31,10 @@ class ArkaOfis extends CI_Controller
     public function index()
     {
         $this->template->loadData("activeLink",
-            array("admin" => array("general" => 1)));
+            array("arkaofis" => array("gosterge" => 1)));
         $this->template->loadContent("arkaofis/index", array(
             )
         );
-
     }
 
     public function user_logs()
@@ -70,10 +69,10 @@ class ArkaOfis extends CI_Controller
         );
 
         $this->datatables->set_total_rows(
-            $this->admin_model
+            $this->Yonetim_Model
                 ->get_total_user_logs()
         );
-        $logs = $this->admin_model->get_user_logs($this->datatables);
+        $logs = $this->Yonetim_Model->get_user_logs($this->datatables);
 
         foreach($logs->result() as $r) {
 
@@ -95,7 +94,7 @@ class ArkaOfis extends CI_Controller
         }
         $this->template->loadData("activeLink",
             array("admin" => array("custom_fields" => 1)));
-        $fields = $this->admin_model->get_custom_fields(array());
+        $fields = $this->Yonetim_Model->get_custom_fields(array());
         $this->template->loadContent("admin/custom_fields.php", array(
                 "fields" => $fields
             )
@@ -127,7 +126,7 @@ class ArkaOfis extends CI_Controller
         }
 
         // Add
-        $this->admin_model->add_custom_field(array(
+        $this->Yonetim_Model->add_custom_field(array(
                 "name" => $name,
                 "type" => $type,
                 "options" => $options,
@@ -139,7 +138,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -160,7 +159,7 @@ class ArkaOfis extends CI_Controller
         $this->template->loadData("activeLink",
             array("admin" => array("custom_fields" => 1)));
         $id = intval($id);
-        $field = $this->admin_model->get_custom_field($id);
+        $field = $this->Yonetim_Model->get_custom_field($id);
         if($field->num_rows() == 0) {
             $this->template->error(lang("error_77"));
         }
@@ -179,7 +178,7 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $field = $this->admin_model->get_custom_field($id);
+        $field = $this->Yonetim_Model->get_custom_field($id);
         if($field->num_rows() == 0) {
             $this->template->error(lang("error_77"));
         }
@@ -204,7 +203,7 @@ class ArkaOfis extends CI_Controller
         }
 
         // Add
-        $this->admin_model->update_custom_field($id, array(
+        $this->Yonetim_Model->update_custom_field($id, array(
                 "name" => $name,
                 "type" => $type,
                 "options" => $options,
@@ -216,7 +215,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -239,14 +238,14 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_6"));
         }
         $id = intval($id);
-        $field = $this->admin_model->get_custom_field($id);
+        $field = $this->Yonetim_Model->get_custom_field($id);
         if($field->num_rows() == 0) {
             $this->template->error(lang("error_77"));
         }
 
-        $this->admin_model->delete_custom_field($id);
+        $this->Yonetim_Model->delete_custom_field($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -291,10 +290,10 @@ class ArkaOfis extends CI_Controller
         );
 
         $this->datatables->set_total_rows(
-            $this->admin_model
+            $this->Yonetim_Model
                 ->get_total_premium_users_count()
         );
-        $users = $this->admin_model->get_premium_users($this->datatables);
+        $users = $this->Yonetim_Model->get_premium_users($this->datatables);
 
         foreach($users->result() as $r) {
             $time = $this->common->convert_time($r->premium_time);
@@ -318,7 +317,7 @@ class ArkaOfis extends CI_Controller
         if(!$this->user->info->admin) $this->template->error(lang("error_2"));
         $this->template->loadData("activeLink",
             array("admin" => array("user_roles" => 1)));
-        $roles = $this->admin_model->get_user_roles();
+        $roles = $this->Yonetim_Model->get_user_roles();
 
         $permissions = $this->get_default_permissions();
 
@@ -354,11 +353,11 @@ class ArkaOfis extends CI_Controller
         }
         $data['name'] = $name;
 
-        $this->admin_model->add_user_role(
+        $this->Yonetim_Model->add_user_role(
             $data
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -375,7 +374,7 @@ class ArkaOfis extends CI_Controller
     {
         if(!$this->user->info->admin) $this->template->error(lang("error_2"));
         $id = intval($id);
-        $role = $this->admin_model->get_user_role($id);
+        $role = $this->Yonetim_Model->get_user_role($id);
         if ($role->num_rows() == 0) $this->template->error(lang("error_65"));
 
         $role = $role->row();
@@ -398,7 +397,7 @@ class ArkaOfis extends CI_Controller
 
     private function get_default_permissions()
     {
-        $urp = $this->admin_model->get_user_role_permissions();
+        $urp = $this->Yonetim_Model->get_user_role_permissions();
         $permissions = array();
         foreach($urp->result() as $r) {
             $permissions[$r->hook] = array(
@@ -416,7 +415,7 @@ class ArkaOfis extends CI_Controller
     {
         if(!$this->user->info->admin) $this->template->error(lang("error_2"));
         $id = intval($id);
-        $role = $this->admin_model->get_user_role($id);
+        $role = $this->Yonetim_Model->get_user_role($id);
         if ($role->num_rows() == 0) $this->template->error(lang("error_65"));
 
         $name = $this->common->nohtml($this->input->post("name"));
@@ -441,11 +440,11 @@ class ArkaOfis extends CI_Controller
         $data['name'] = $name;
 
 
-        $this->admin_model->update_user_role($id,
+        $this->Yonetim_Model->update_user_role($id,
             $data
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -464,14 +463,14 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_6"));
         }
         $id = intval($id);
-        $group = $this->admin_model->get_user_role($id);
+        $group = $this->Yonetim_Model->get_user_role($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_65"));
         $group = $group->row();
 
-        $this->admin_model->delete_user_role($id);
+        $this->Yonetim_Model->delete_user_role($id);
         // Delete all user groups from member
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -521,10 +520,10 @@ class ArkaOfis extends CI_Controller
         );
 
         $this->datatables->set_total_rows(
-            $this->admin_model
+            $this->Yonetim_Model
                 ->get_total_payment_logs_count()
         );
-        $logs = $this->admin_model->get_payment_logs($this->datatables);
+        $logs = $this->Yonetim_Model->get_payment_logs($this->datatables);
 
         foreach($logs->result() as $r) {
             $this->datatables->data[] = array(
@@ -546,7 +545,7 @@ class ArkaOfis extends CI_Controller
         }
         $this->template->loadData("activeLink",
             array("admin" => array("payment_plans" => 1)));
-        $plans = $this->admin_model->get_payment_plans();
+        $plans = $this->Yonetim_Model->get_payment_plans();
 
         $this->template->loadContent("admin/payment_plans.php", array(
                 "plans" => $plans
@@ -567,7 +566,7 @@ class ArkaOfis extends CI_Controller
         $days = intval($this->input->post("days"));
         $icon = $this->common->nohtml($this->input->post("icon"));
 
-        $this->admin_model->add_payment_plan(array(
+        $this->Yonetim_Model->add_payment_plan(array(
                 "name" => $name,
                 "cost" => $cost,
                 "hexcolor" => $color,
@@ -580,7 +579,7 @@ class ArkaOfis extends CI_Controller
 
         $this->session->set_flashdata("globalmsg", lang("success_25"));
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -602,7 +601,7 @@ class ArkaOfis extends CI_Controller
         $this->template->loadData("activeLink",
             array("admin" => array("payment_plans" => 1)));
         $id = intval($id);
-        $plan = $this->admin_model->get_payment_plan($id);
+        $plan = $this->Yonetim_Model->get_payment_plan($id);
         if($plan->num_rows() == 0) $this->template->error(lang("error_61"));
 
         $this->template->loadContent("admin/edit_payment_plan.php", array(
@@ -617,7 +616,7 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $plan = $this->admin_model->get_payment_plan($id);
+        $plan = $this->Yonetim_Model->get_payment_plan($id);
         if($plan->num_rows() == 0) $this->template->error(lang("error_61"));
 
         $name = $this->common->nohtml($this->input->post("name"));
@@ -628,7 +627,7 @@ class ArkaOfis extends CI_Controller
         $days = intval($this->input->post("days"));
         $icon = $this->common->nohtml($this->input->post("icon"));
 
-        $this->admin_model->update_payment_plan($id, array(
+        $this->Yonetim_Model->update_payment_plan($id, array(
                 "name" => $name,
                 "cost" => $cost,
                 "hexcolor" => $color,
@@ -639,7 +638,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -662,13 +661,13 @@ class ArkaOfis extends CI_Controller
         }
 
         $id = intval($id);
-        $plan = $this->admin_model->get_payment_plan($id);
+        $plan = $this->Yonetim_Model->get_payment_plan($id);
         if($plan->num_rows() == 0) $this->template->error(lang("error_61"));
         $plan = $plan->row();
 
-        $this->admin_model->delete_payment_plan($id);
+        $this->Yonetim_Model->delete_payment_plan($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -712,7 +711,7 @@ class ArkaOfis extends CI_Controller
         $checkout2_accountno = $this->common->nohtml($this->input->post("checkout2_accountno"));
 
         // update
-        $this->admin_model->updateSettings(
+        $this->Yonetim_Model->updateSettings(
             array(
                 "paypal_email" => $paypal_email,
                 "paypal_currency" => $paypal_currency,
@@ -726,7 +725,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -746,7 +745,7 @@ class ArkaOfis extends CI_Controller
         }
         $this->template->loadData("activeLink",
             array("admin" => array("email_members" => 1)));
-        $groups = $this->admin_model->get_user_groups();
+        $groups = $this->Yonetim_Model->get_user_groups();
         $this->template->loadContent("admin/email_members.php", array(
                 "groups" => $groups
             )
@@ -766,7 +765,7 @@ class ArkaOfis extends CI_Controller
         if ($groupid == -1) {
             // All members
             $users = array();
-            $usersc = $this->admin_model->get_all_users();
+            $usersc = $this->Yonetim_Model->get_all_users();
             foreach ($usersc->result() as $r) {
                 $users[] = $r;
             }
@@ -776,7 +775,7 @@ class ArkaOfis extends CI_Controller
             $users = array();
             foreach ($usernames as $username) {
                 if (empty($username)) continue;
-                $user = $this->user_model->get_user_by_username($username);
+                $user = $this->Kullanici_Model->get_user_by_username($username);
                 if ($user->num_rows() == 0) {
                     $this->template->error(lang("error_3") . $username);
                 }
@@ -784,12 +783,12 @@ class ArkaOfis extends CI_Controller
             }
 
             if ($groupid > 0) {
-                $group = $this->admin_model->get_user_group($groupid);
+                $group = $this->Yonetim_Model->get_user_group($groupid);
                 if ($group->num_rows() == 0) {
                     $this->template->error(lang("error_4"));
                 }
 
-                $users_g = $this->admin_model->get_all_group_users($groupid);
+                $users_g = $this->Yonetim_Model->get_all_group_users($groupid);
                 $cusers = $users;
 
                 foreach ($users_g->result() as $r) {
@@ -810,7 +809,7 @@ class ArkaOfis extends CI_Controller
             $this->common->send_email($title, $message, $r->email);
         }
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -830,7 +829,7 @@ class ArkaOfis extends CI_Controller
         }
         $this->template->loadData("activeLink",
             array("admin" => array("user_groups" => 1)));
-        $groups = $this->admin_model->get_user_groups();
+        $groups = $this->Yonetim_Model->get_user_groups();
         $this->template->loadContent("admin/groups.php", array(
                 "groups" => $groups
             )
@@ -847,14 +846,14 @@ class ArkaOfis extends CI_Controller
         if (empty($name)) $this->template->error(lang("error_5"));
 
 
-        $this->admin_model->add_group(
+        $this->Yonetim_Model->add_group(
             array(
                 "name" =>$name,
                 "default" => $default,
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -872,7 +871,7 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
 
         $this->template->loadData("activeLink",
@@ -890,21 +889,21 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
 
         $name = $this->common->nohtml($this->input->post("name"));
         $default = intval($this->input->post("default_group"));
         if (empty($name)) $this->template->error(lang("error_5"));
 
-        $this->admin_model->update_group($id,
+        $this->Yonetim_Model->update_group($id,
             array(
                 "name" =>$name,
                 "default" => $default
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -925,15 +924,15 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_6"));
         }
         $id = intval($id);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
         $group = $group->row();
 
-        $this->admin_model->delete_group($id);
+        $this->Yonetim_Model->delete_group($id);
         // Delete all user groups from member
-        $this->admin_model->delete_users_from_group($id);
+        $this->Yonetim_Model->delete_users_from_group($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -955,14 +954,14 @@ class ArkaOfis extends CI_Controller
             array("admin" => array("user_groups" => 1)));
         $id = intval($id);
         $page = intval($page);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
 
-        $users = $this->admin_model->get_users_from_groups($id, $page);
+        $users = $this->Yonetim_Model->get_users_from_groups($id, $page);
 
         $this->load->library('pagination');
         $config['base_url'] = site_url("admin/view_group/" . $id);
-        $config['total_rows'] = $this->admin_model
+        $config['total_rows'] = $this->Yonetim_Model
             ->get_total_user_group_members_count($id);
         $config['per_page'] = 20;
         $config['uri_segment'] = 4;
@@ -986,7 +985,7 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
         $group = $group->row();
 
@@ -995,7 +994,7 @@ class ArkaOfis extends CI_Controller
 
         $users = array();
         foreach ($usernames as $username) {
-            $user = $this->user_model->get_user_by_username($username);
+            $user = $this->Kullanici_Model->get_user_by_username($username);
             if($user->num_rows() == 0) $this->template->error(lang("error_3")
                 . $username);
             $users[] = $user->row();
@@ -1003,13 +1002,13 @@ class ArkaOfis extends CI_Controller
 
         foreach ($users as $user) {
             // Check not already a member
-            $userc = $this->admin_model->get_user_from_group($user->ID, $id);
+            $userc = $this->Yonetim_Model->get_user_from_group($user->ID, $id);
             if ($userc->num_rows() == 0) {
-                $this->admin_model->add_user_to_group($user->ID, $id);
+                $this->Yonetim_Model->add_user_to_group($user->ID, $id);
             }
         }
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1032,17 +1031,17 @@ class ArkaOfis extends CI_Controller
         }
         $id = intval($id);
         $userid = intval($userid);
-        $group = $this->admin_model->get_user_group($id);
+        $group = $this->Yonetim_Model->get_user_group($id);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
         $group = $group->row();
 
-        $user = $this->admin_model->get_user_from_group($userid, $id);
+        $user = $this->Yonetim_Model->get_user_from_group($userid, $id);
         if ($user->num_rows() == 0) $this->template->error(lang("error_7"));
         $user = $user->row();
 
-        $this->admin_model->delete_user_from_group($userid, $id);
+        $this->Yonetim_Model->delete_user_from_group($userid, $id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1092,10 +1091,10 @@ class ArkaOfis extends CI_Controller
         );
 
         $this->datatables->set_total_rows(
-            $this->admin_model
+            $this->Yonetim_Model
                 ->get_total_email_templates()
         );
-        $templates = $this->admin_model->get_email_templates($this->datatables);
+        $templates = $this->Yonetim_Model->get_email_templates($this->datatables);
 
         foreach($templates->result() as $r) {
 
@@ -1116,7 +1115,7 @@ class ArkaOfis extends CI_Controller
         $hook = $this->common->nohtml($this->input->post("hook"));
         $language = $this->common->nohtml($this->input->post("language"));
 
-        $this->admin_model->add_email_template(array(
+        $this->Yonetim_Model->add_email_template(array(
                 "title" => $title,
                 "message" => $template,
                 "hook" => $hook,
@@ -1124,7 +1123,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1146,7 +1145,7 @@ class ArkaOfis extends CI_Controller
             array("admin" => array("email_templates" => 1)));
         $id = intval($id);
 
-        $email_template = $this->admin_model->get_email_template($id);
+        $email_template = $this->Yonetim_Model->get_email_template($id);
         if ($email_template->num_rows() == 0) {
             $this->template->error(lang("error_8"));
         }
@@ -1168,7 +1167,7 @@ class ArkaOfis extends CI_Controller
         $this->template->loadData("activeLink",
             array("admin" => array("email_templates" => 1)));
         $id = intval($id);
-        $email_template = $this->admin_model->get_email_template($id);
+        $email_template = $this->Yonetim_Model->get_email_template($id);
         if ($email_template->num_rows() == 0) {
             $this->template->error(lang("error_8"));
         }
@@ -1178,7 +1177,7 @@ class ArkaOfis extends CI_Controller
         $hook = $this->common->nohtml($this->input->post("hook"));
         $language = $this->common->nohtml($this->input->post("language"));
 
-        $this->admin_model->update_email_template($id, array(
+        $this->Yonetim_Model->update_email_template($id, array(
                 "title" => $title,
                 "message" => $template,
                 "hook" => $hook,
@@ -1186,7 +1185,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1206,14 +1205,14 @@ class ArkaOfis extends CI_Controller
         }
         $id = intval($id);
 
-        $email_template = $this->admin_model->get_email_template($id);
+        $email_template = $this->Yonetim_Model->get_email_template($id);
         if ($email_template->num_rows() == 0) {
             $this->template->error(lang("error_8"));
         }
 
-        $this->admin_model->delete_email_template($id);
+        $this->Yonetim_Model->delete_email_template($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1233,7 +1232,7 @@ class ArkaOfis extends CI_Controller
         $this->template->loadData("activeLink",
             array("admin" => array("ipblock" => 1)));
 
-        $ipblock = $this->admin_model->get_ip_blocks();
+        $ipblock = $this->Yonetim_Model->get_ip_blocks();
 
         $this->template->loadContent("admin/ipblock.php", array(
                 "ipblock" => $ipblock
@@ -1251,9 +1250,9 @@ class ArkaOfis extends CI_Controller
 
         if (empty($ip)) $this->template->error(lang("error_10"));
 
-        $this->admin_model->add_ipblock($ip, $reason);
+        $this->Yonetim_Model->add_ipblock($ip, $reason);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1271,13 +1270,13 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $ipblock = $this->admin_model->get_ip_block($id);
+        $ipblock = $this->Yonetim_Model->get_ip_block($id);
         if ($ipblock->num_rows() == 0) $this->template->error(lang("error_11"));
         $ipblock = $ipblock->row();
 
-        $this->admin_model->delete_ipblock($id);
+        $this->Yonetim_Model->delete_ipblock($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1297,9 +1296,9 @@ class ArkaOfis extends CI_Controller
         $this->template->loadData("activeLink",
             array("admin" => array("members" => 1)));
 
-        $user_roles = $this->admin_model->get_user_roles();
+        $user_roles = $this->Yonetim_Model->get_user_roles();
 
-        $fields = $this->user_model->get_custom_fields(array("register"=>1));
+        $fields = $this->Kullanici_Model->get_custom_fields(array("register"=>1));
 
         $this->template->loadContent("admin/members.php", array(
                 "user_roles" => $user_roles,
@@ -1342,10 +1341,10 @@ class ArkaOfis extends CI_Controller
         );
 
         $this->datatables->set_total_rows(
-            $this->user_model
+            $this->Kullanici_Model
                 ->get_total_members_count()
         );
-        $members = $this->user_model->get_members_admin($this->datatables);
+        $members = $this->Kullanici_Model->get_members_admin($this->datatables);
 
         foreach($members->result() as $r) {
             if($r->oauth_provider == "google") {
@@ -1381,14 +1380,14 @@ class ArkaOfis extends CI_Controller
             array("admin" => array("members" => 1)));
         $id = intval($id);
 
-        $member = $this->user_model->get_user_by_id($id);
+        $member = $this->Kullanici_Model->get_user_by_id($id);
         if ($member->num_rows() ==0 ) $this->template->error(lang("error_13"));
 
         $member = $member->row();
 
         // Groups
-        $user_groups = $this->user_model->get_user_groups($id);
-        $groups = $this->admin_model->get_user_groups();
+        $user_groups = $this->Kullanici_Model->get_user_groups($id);
+        $groups = $this->Yonetim_Model->get_user_groups();
 
 
         $this->template->loadContent("admin/member_user_groups.php", array(
@@ -1407,24 +1406,24 @@ class ArkaOfis extends CI_Controller
         }
         $id = intval($id);
 
-        $member = $this->user_model->get_user_by_id($id);
+        $member = $this->Kullanici_Model->get_user_by_id($id);
         if ($member->num_rows() ==0 ) $this->template->error(lang("error_13"));
 
         $member = $member->row();
 
         $groupid = intval($this->input->post("groupid"));
 
-        $group = $this->admin_model->get_user_group($groupid);
+        $group = $this->Yonetim_Model->get_user_group($groupid);
         if ($group->num_rows() == 0) $this->template->error(lang("error_4"));
 
-        $userc = $this->admin_model->get_user_from_group($id, $groupid);
+        $userc = $this->Yonetim_Model->get_user_from_group($id, $groupid);
         if ($userc->num_rows() > 0) {
             $this->template->error("This user is already a member of this group!");
         }
 
-        $this->admin_model->add_user_to_group($member->ID, $groupid);
+        $this->Yonetim_Model->add_user_to_group($member->ID, $groupid);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1448,12 +1447,12 @@ class ArkaOfis extends CI_Controller
             array("admin" => array("members" => 1)));
         $id = intval($id);
 
-        $member = $this->user_model->get_user_by_id($id);
+        $member = $this->Kullanici_Model->get_user_by_id($id);
         if ($member->num_rows() ==0 ) $this->template->error(lang("error_13"));
 
-        $user_groups = $this->user_model->get_user_groups($id);
-        $user_roles = $this->admin_model->get_user_roles();
-        $fields = $this->user_model->get_custom_fields_answers(array(
+        $user_groups = $this->Kullanici_Model->get_user_groups($id);
+        $user_roles = $this->Yonetim_Model->get_user_roles();
+        $fields = $this->Kullanici_Model->get_custom_fields_answers(array(
         ), $id);
 
         $this->template->loadContent("admin/edit_member.php", array(
@@ -1471,15 +1470,15 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_2"));
         }
         $id = intval($id);
-        $fields = $this->user_model->get_custom_fields_answers(array(
+        $fields = $this->Kullanici_Model->get_custom_fields_answers(array(
         ), $id);
 
-        $member = $this->user_model->get_user_by_id($id);
+        $member = $this->Kullanici_Model->get_user_by_id($id);
         if ($member->num_rows() ==0 ) $this->template->error(lang("error_13"));
 
         $member = $member->row();
 
-        $this->load->model("register_model");
+        $this->load->model("Kayit_Model");
         $email = $this->input->post("email", true);
         $first_name = $this->common->nohtml(
             $this->input->post("first_name", true));
@@ -1508,7 +1507,7 @@ class ArkaOfis extends CI_Controller
         }
 
         if ($username != $member->username) {
-            if (!$this->register_model->check_username_is_free($username)) {
+            if (!$this->Kayit_Model->check_username_is_free($username)) {
                 $this->template->error(lang("error_16"));
             }
         }
@@ -1534,7 +1533,7 @@ class ArkaOfis extends CI_Controller
         }
 
         if ($email != $member->email) {
-            if (!$this->register_model->checkEmailIsFree($email)) {
+            if (!$this->Kayit_Model->checkEmailIsFree($email)) {
                 $this->template->error(lang("error_20"));
             }
         }
@@ -1545,7 +1544,7 @@ class ArkaOfis extends CI_Controller
             }
         }
         if($user_role > 0) {
-            $role = $this->admin_model->get_user_role($user_role);
+            $role = $this->Yonetim_Model->get_user_role($user_role);
             if($role->num_rows() == 0) $this->template->error(lang("error_65"));
         }
 
@@ -1674,7 +1673,7 @@ class ArkaOfis extends CI_Controller
         }
 
 
-        $this->user_model->update_user($id,
+        $this->Kullanici_Model->update_user($id,
             array(
                 "username" => $username,
                 "email" => $email,
@@ -1699,21 +1698,21 @@ class ArkaOfis extends CI_Controller
         // Add Custom Fields data
         foreach($answers as $answer) {
             // Check if field exists
-            $field = $this->user_model->get_user_cf($answer['fieldid'], $id);
+            $field = $this->Kullanici_Model->get_user_cf($answer['fieldid'], $id);
             if($field->num_rows() == 0) {
-                $this->user_model->add_custom_field(array(
+                $this->Kullanici_Model->add_custom_field(array(
                         "userid" => $id,
                         "fieldid" => $answer['fieldid'],
                         "value" => $answer['answer']
                     )
                 );
             } else {
-                $this->user_model->update_custom_field($answer['fieldid'],
+                $this->Kullanici_Model->update_custom_field($answer['fieldid'],
                     $id, $answer['answer']);
             }
         }
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1732,7 +1731,7 @@ class ArkaOfis extends CI_Controller
         if(!$this->user->info->admin && !$this->user->info->admin_members) {
             $this->template->error(lang("error_2"));
         }
-        $this->load->model("register_model");
+        $this->load->model("Kayit_Model");
         $email = $this->input->post("email", true);
         $first_name = $this->common->nohtml(
             $this->input->post("first_name", true));
@@ -1748,7 +1747,7 @@ class ArkaOfis extends CI_Controller
         $user_role = intval($this->input->post("user_role"));
 
         if($user_role > 0) {
-            $role = $this->admin_model->get_user_role($user_role);
+            $role = $this->Yonetim_Model->get_user_role($user_role);
             if($role->num_rows() == 0) $this->template->error(lang("error_65"));
             $role = $role->row();
             if($role->admin || $role->admin_members || $role->admin_settings
@@ -1766,7 +1765,7 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_15"));
         }
 
-        if (!$this->register_model->check_username_is_free($username)) {
+        if (!$this->Kayit_Model->check_username_is_free($username)) {
             $this->template->error(lang("error_16"));
         }
 
@@ -1786,11 +1785,11 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_19"));
         }
 
-        if (!$this->register_model->checkEmailIsFree($email)) {
+        if (!$this->Kayit_Model->checkEmailIsFree($email)) {
             $this->template->error(lang("error_20"));
         }
 
-        $fields = $this->user_model->get_custom_fields_answers(array(
+        $fields = $this->Kullanici_Model->get_custom_fields_answers(array(
         ), 0);
         // Custom Fields
         // Process fields
@@ -1896,7 +1895,7 @@ class ArkaOfis extends CI_Controller
         }
 
         $pass = $this->common->encrypt($pass);
-        $this->register_model->add_user(array(
+        $this->Kayit_Model->add_user(array(
                 "username" => $username,
                 "email" => $email,
                 "first_name" => $first_name,
@@ -1910,7 +1909,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1932,14 +1931,14 @@ class ArkaOfis extends CI_Controller
             $this->template->error(lang("error_6"));
         }
         $id = intval($id);
-        $member = $this->user_model->get_user_by_id($id);
+        $member = $this->Kullanici_Model->get_user_by_id($id);
         if ($member->num_rows() ==0 ) $this->template->error(lang("error_13"));
         $member = $member->row();
 
-        $this->user_model->delete_user($id);
-        $this->user_model->delete_user_from_groups($id);
+        $this->Kullanici_Model->delete_user($id);
+        $this->Kullanici_Model->delete_user_from_groups($id);
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -1983,7 +1982,7 @@ class ArkaOfis extends CI_Controller
         $google_client_secret =
             $this->common->nohtml($this->input->post("google_client_secret"));
 
-        $this->admin_model->updateSettings(
+        $this->Yonetim_Model->updateSettings(
             array(
                 "disable_social_login" => $disable_social_login,
                 "twitter_consumer_key" => $twitter_consumer_key,
@@ -1995,7 +1994,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -2014,8 +2013,8 @@ class ArkaOfis extends CI_Controller
         }
         $this->template->loadData("activeLink",
             array("admin" => array("settings" => 1)));
-        $roles = $this->admin_model->get_user_roles();
-        $layouts = $this->admin_model->get_layouts();
+        $roles = $this->Yonetim_Model->get_user_roles();
+        $layouts = $this->Yonetim_Model->get_layouts();
         $this->template->loadContent("admin/settings.php", array(
                 "roles" => $roles,
                 "layouts" => $layouts
@@ -2059,7 +2058,7 @@ class ArkaOfis extends CI_Controller
         $cache_time = intval($this->input->post("cache_time"));
 
         $layoutid = intval($this->input->post("layoutid"));
-        $layout = $this->admin_model->get_layout($layoutid);
+        $layout = $this->Yonetim_Model->get_layout($layoutid);
         if($layout->num_rows() == 0) {
             $this->template->error("Invalid Layout");
         }
@@ -2095,7 +2094,7 @@ class ArkaOfis extends CI_Controller
             $image= $this->settings->info->site_logo;
         }
 
-        $this->admin_model->updateSettings(
+        $this->Yonetim_Model->updateSettings(
             array(
                 "site_name" => $site_name,
                 "site_desc" => $site_desc,
@@ -2126,7 +2125,7 @@ class ArkaOfis extends CI_Controller
             )
         );
 
-        $this->user_model->add_log(array(
+        $this->Kullanici_Model->add_log(array(
                 "userid" => $this->user->info->ID,
                 "IP" => $_SERVER['REMOTE_ADDR'],
                 "user_agent" => $_SERVER['HTTP_USER_AGENT'],
@@ -2136,6 +2135,161 @@ class ArkaOfis extends CI_Controller
         );
         $this->session->set_flashdata("globalmsg", lang("success_13"));
         redirect(site_url("admin/settings"));
+    }
+
+
+
+    public function load_notifications()
+    {
+        $notifications = $this->Kullanici_Model
+            ->get_notifications($this->user->info->ID);
+        $this->template->loadAjax("arkaofis/ajax_notifications", array(
+            "notifications" => $notifications
+        ),0
+        );
+    }
+
+    public function load_notifications_unread()
+    {
+        $notifications = $this->Kullanici_Model
+            ->get_notifications_unread($this->user->info->ID);
+        $this->template->loadAjax("arkaofis/ajax_notifications", array(
+            "notifications" => $notifications
+        ),0
+        );
+    }
+
+    public function read_all_noti($hash)
+    {
+        if($hash != $this->security->get_csrf_hash()) {
+            $this->template->error("Invalid Hash!");
+        }
+
+        $this->Kullanici_Model->update_user_notifications($this->user->info->ID, array(
+                "status" => 1
+            )
+        );
+
+        $this->Kullanici_Model->update_user($this->user->info->ID, array(
+                "noti_count" => 0
+            )
+        );
+
+        $this->session->set_flashdata("globalmsg", lang("success_43"));
+        redirect(site_url("arkaofis/bildirimler"));
+    }
+
+    public function load_notification($id)
+    {
+        $notification = $this->Kullanici_Model
+            ->get_notification($id, $this->user->info->ID);
+        if($notification->num_rows() == 0) {
+            $this->template->error("Geçersiz Bildirim!");
+        }
+        $noti = $notification->row();
+        if(!$noti->status) {
+            $this->Kullanici_Model->update_notification($id, array(
+                    "status" => 1
+                )
+            );
+            $this->Kullanici_Model->update_user($this->user->info->ID, array(
+                    "noti_count" => $this->user->info->noti_count - 1
+                )
+            );
+        }
+
+        // redirect
+        redirect(site_url($noti->url));
+    }
+
+    public function bildirimler()
+    {
+        $this->template->loadContent("arkaofis/bildirimler", array(
+            )
+        );
+    }
+
+    public function notification_read($id)
+    {
+        $notification = $this->Kullanici_Model
+            ->get_notification($id, $this->user->info->ID);
+        if($notification->num_rows() == 0) {
+            $this->template->error("Geçersiz Bildirim!");
+        }
+        $noti = $notification->row();
+        if(!$noti->status) {
+            $this->Kullanici_Model->update_notification($id, array(
+                    "status" => 1
+                )
+            );
+            $this->Kullanici_Model->update_user($this->user->info->ID, array(
+                    "noti_count" => $this->user->info->noti_count - 1
+                )
+            );
+        }
+        redirect(site_url("arkaofis/bildirimler"));
+    }
+
+    public function notification_unread($id)
+    {
+        $notification = $this->Kullanici_Model
+            ->get_notification($id, $this->user->info->ID);
+        if($notification->num_rows() == 0) {
+            $this->template->error("Geçersiz Bildirim!");
+        }
+        $noti = $notification->row();
+        if($noti->status) {
+            $this->Kullanici_Model->update_notification($id, array(
+                    "status" => 0
+                )
+            );
+            $this->Kullanici_Model->update_user($this->user->info->ID, array(
+                    "noti_count" => $this->user->info->noti_count + 1
+                )
+            );
+        }
+        redirect(site_url("arkaofis/bildirimler"));
+    }
+
+    public function notifications_page()
+    {
+        $this->load->library("datatables");
+
+        $this->datatables->set_default_order("user_notifications.timestamp", "desc");
+
+        // Set page ordering options that can be used
+        $this->datatables->ordering(
+            array(
+                2 => array(
+                    "user_notifications.timestamp" => 0
+                )
+            )
+        );
+        $this->datatables->set_total_rows(
+            $this->Kullanici_Model
+                ->get_notifications_all_total($this->user->info->ID)
+        );
+        $notifications = $this->Kullanici_Model
+            ->get_notifications_all($this->user->info->ID, $this->datatables);
+
+
+
+        foreach($notifications->result() as $r) {
+            $msg = '<a href="'.site_url("profile/" . $r->username).'">'.$r->username.'</a> ' . $r->message;
+            $options = '<a href="'.site_url("arkaofis/notification_unread/" . $r->ID).'" class="btn btn-info btn-fw"></i>Okunmadı Olarak İşaretle</a>';
+            if($r->status !=1) {
+                $msg .=' <label class="btn btn-primary btn-fw">Okunmadı</label>';
+                $options = '<a href="'.site_url("arkaofis/notification_read/" . $r->ID).'" class="btn btn-success btn-fw">Okundu Olarak İşaretle</a>';
+            }
+
+            $this->datatables->data[] = array(
+                $this->common->get_user_display(array("username" => $r->username, "avatar" => $r->avatar, "online_timestamp" => $r->online_timestamp)),
+                $msg,
+                date($this->settings->info->date_format, $r->timestamp),
+                $options . ' <a href="'.site_url("arkaofis/load_notification/" . $r->ID).'" class="btn btn-primary btn-fw">Göster</a>'
+            );
+        }
+        echo json_encode($this->datatables->process());
     }
 
 }

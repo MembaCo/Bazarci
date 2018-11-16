@@ -86,10 +86,17 @@
           <a class="navbar-brand" href="<?php echo site_url() ?>" title="<?php echo $this->settings->info->site_name ?>"><?php echo $this->settings->info->site_name ?></a>
         <?php endif; ?>
         </div>
+
+////////////////
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
           <?php if($this->user->loggedin) : ?>
-            <li><a href="#" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span><?php if($this->user->info->noti_count > 0) : ?><span class="badge notification-badge small-text"><?php echo $this->user->info->noti_count ?></span><?php endif; ?></a>
+            <li>--<a href="#" data-target="#" onclick="load_notifications()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="noti-menu-drop"><span class="glyphicon glyphicon-bell notification-icon"></span>
+                    <?php if($this->user->info->noti_count > 0) : ?>
+                        <span class="badge notification-badge small-text">
+                        <?php echo $this->user->info->noti_count ?></span>
+                    <?php endif; ?>
+                </a>
         
             <ul class="dropdown-menu" aria-labelledby="noti-menu-drop">
             <li>
@@ -107,7 +114,11 @@
           </li>
           </ul>
           </li>
-            <li class="user_bit"><img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar"> <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo $this->user->info->username ?></a>
+
+            <li class="user_bit">
+                <img src="<?php echo base_url() ?><?php echo $this->settings->info->upload_path_relative ?>/<?php echo $this->user->info->avatar ?>" class="user_avatar">
+                <a href="javascript:void(0)" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><?php echo $this->user->info->username ?>
+                </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="<?php echo site_url("profile/" . $this->user->info->username) ?>">Profile</a></li>
               <li><a href="<?php echo site_url("user_settings") ?>"><?php echo lang("ctn_156") ?></a></li>
@@ -118,13 +129,19 @@
             </ul>
 
             </li>
+
             <li><a href="<?php echo site_url("login/logout/" . $this->security->get_csrf_hash()) ?>"><?php echo lang("ctn_149") ?></a></li>
+
           <?php else : ?>
           <li><a href="<?php echo site_url("login") ?>"><?php echo lang("ctn_150") ?></a></li>
             <li><a href="<?php echo site_url("register") ?>"><?php echo lang("ctn_151") ?></a></li>
           <?php endif; ?>
           </ul>
         </div>
+
+
+
+
       </div>
     </nav>
 

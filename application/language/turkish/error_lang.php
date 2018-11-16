@@ -1,12 +1,12 @@
 <?php
 
-$lang['error_1'] = "You need to be logged in to view this page!";
-$lang['error_2'] = "You do not have access to this page!";
-$lang['error_3'] = "This user does not exist:";
-$lang['error_4'] = "Invalid Group!";
-$lang['error_5'] = "Group name cannot be empty!";
-$lang['error_6'] = "Invalid Hash!";
-$lang['error_7'] = "That user is not part of this group!";
+$lang['error_1'] = "Bu Sayfayı Görebilmeniz için önce Giriş Yapmalısınız!";
+$lang['error_2'] = "Bu sayfaya erişiminiz yok!";
+$lang['error_3'] = "Böyle bir kullanıcı yok:";
+$lang['error_4'] = "Geçersiz Group!";
+$lang['error_5'] = "Group adı boş olamaz!";
+$lang['error_6'] = "Geçersiz Hash!";
+$lang['error_7'] = "Kullanıcı Grubun Üyesi Değil !";
 $lang['error_8'] = "Invalid Email Template";
 $lang['error_9'] = "You cannot leave the title or message empty!";
 $lang['error_10'] = "IP cannot be empty!";

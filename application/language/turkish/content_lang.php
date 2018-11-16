@@ -52,7 +52,7 @@ $lang['ctn_48'] = "Title";
 $lang['ctn_49'] = "Email Body";
 $lang['ctn_50'] = "Send Email";
 $lang['ctn_51'] = "Here you can view all the User Groups on your site. You can use them to organise your members.";
-$lang['ctn_52'] = "Options";
+$lang['ctn_52'] = "Seçenekler";
 $lang['ctn_53'] = "Yes";
 $lang['ctn_54'] = "No";
 $lang['ctn_55'] = "Edit";
@@ -135,9 +135,9 @@ $lang['ctn_131'] = "Separate each username with a comma that you wish to add to 
 $lang['ctn_132'] = "Users";
 
 // Error Page
-$lang['ctn_133'] = "Error";
-$lang['ctn_134'] = "Notice";
-$lang['ctn_135'] = "Go Back";
+$lang['ctn_133'] = "Hata";
+$lang['ctn_134'] = "Uyarı";
+$lang['ctn_135'] = "Geri";
 
 // Home Page
 $lang['ctn_136'] = "Members";
@@ -152,19 +152,19 @@ $lang['ctn_144'] = "Today!";
 $lang['ctn_145'] = "Member Breakdown";
 
 // Change Language Page
-$lang['ctn_146'] = "Change Language";
+$lang['ctn_146'] = "Dil Seçimi";
 $lang['ctn_147'] = "Switch to another language from the list below.";
-$lang['ctn_148'] = "Language";
+$lang['ctn_148'] = "Dil";
 
 // Layout
-$lang['ctn_149'] = "Logout";
-$lang['ctn_150'] = "Login";
-$lang['ctn_151'] = "Register";
-$lang['ctn_152'] = "Search";
+$lang['ctn_149'] = "Çıkış";
+$lang['ctn_150'] = "Giriş";
+$lang['ctn_151'] = "Kayıt";
+$lang['ctn_152'] = "Arama";
 $lang['ctn_153'] = "Please login to continue";
 $lang['ctn_154'] = "Overview";
-$lang['ctn_155'] = "Members";
-$lang['ctn_156'] = "Settings";
+$lang['ctn_155'] = "Üyeler";
+$lang['ctn_156'] = "Ayarlar";
 $lang['ctn_157'] = "Admin Panel";
 $lang['ctn_158'] = "Global Settings";
 $lang['ctn_159'] = "Social Settings";
@@ -178,7 +178,7 @@ $lang['ctn_166'] = "Restricted Pages";
 $lang['ctn_167'] = "Admin Page";
 $lang['ctn_168'] = "Group Page";
 $lang['ctn_169'] = "User Page";
-$lang['ctn_170'] = "Made By";
+$lang['ctn_170'] = "Developed by";
 $lang['ctn_171'] = "Change Language";
 
 // Login Area
@@ -186,19 +186,19 @@ $lang['ctn_172'] = "BANNED!";
 $lang['ctn_173'] = "You have been banned from using this site!";
 $lang['ctn_174'] = "Forgot Password";
 $lang['ctn_175'] = "If you've forgotten your password, enter your email address that you used to create an account and we will send it to you.";
-$lang['ctn_176'] = "Send";
+$lang['ctn_176'] = "Gönder";
 $lang['ctn_177'] = "Go Back";
 $lang['ctn_178'] = "Login to";
-$lang['ctn_179'] = "Email";
-$lang['ctn_180'] = "Password";
+$lang['ctn_179'] = "E-Posta";
+$lang['ctn_180'] = "Şifre";
 $lang['ctn_181'] = "Forgotten Password?";
 $lang['ctn_182'] = "Or create an account below";
-$lang['ctn_183'] = "Register";
-$lang['ctn_184'] = "Login";
-$lang['ctn_185'] = "Reset Password";
+$lang['ctn_183'] = "Kayıt";
+$lang['ctn_184'] = "Giriş";
+$lang['ctn_185'] = "Şifre Sıfırlama";
 $lang['ctn_186'] = "Enter your new password below.";
-$lang['ctn_187'] = "New Password";
-$lang['ctn_188'] = "Confirm New Password";
+$lang['ctn_187'] = "Yeni Şifre";
+$lang['ctn_188'] = "Yeni Şifre Tekrarla";
 
 // Member Page
 $lang['ctn_189'] = "Members";
@@ -214,7 +214,7 @@ $lang['ctn_198'] = "Searching for members with username";
 
 // Profile
 $lang['ctn_199'] = "Profile for";
-$lang['ctn_200'] = "Profile";
+$lang['ctn_200'] = "Profil";
 $lang['ctn_201'] = "Name";
 $lang['ctn_202'] = "Joined";
 $lang['ctn_203'] = "Last Online";
@@ -325,7 +325,7 @@ $lang['ctn_289'] = "Premium Page";
 $lang['ctn_290'] = "Whenever a user adds funds to their account, a transaction log is recorded. Below you can view any Payment Logs that have been recorded.";
 $lang['ctn_291'] = "PayPal Email";
 $lang['ctn_292'] = "Amount";
-$lang['ctn_293'] = "Date";
+$lang['ctn_293'] = "Tarih";
 
 // Version 1.2
 $lang['ctn_294'] = "Days";
@@ -377,7 +377,7 @@ $lang['ctn_335'] = "Offline";
 $lang['ctn_336'] = "Search ...";
 $lang['ctn_337'] = "Like";
 $lang['ctn_338'] = "Exact";
-$lang['ctn_339'] = "User";
+$lang['ctn_339'] = "Kullanıcı";
 $lang['ctn_340'] = "First Name";
 $lang['ctn_341'] = "Last Name";
 $lang['ctn_342'] = "User Role";
@@ -455,10 +455,10 @@ $lang['ctn_407'] = "Add Email Template";
 $lang['ctn_408'] = "Available Permissions";
 $lang['ctn_409'] = "Current Permissions";
 $lang['ctn_410'] = "Drag and drop permissions to customise this User Role.";
-$lang['ctn_411'] = "You have no notifications.";
-$lang['ctn_412'] = "Notifications";
-$lang['ctn_413'] = "Mark All Read";
-$lang['ctn_414'] = "Read More";
+$lang['ctn_411'] = "Bildirim Bulunamadı.";
+$lang['ctn_412'] = "Okunmamış Bildirim";
+$lang['ctn_413'] = "Tümünü Okundu İşaretle";
+$lang['ctn_414'] = "Devamını Oku";
 $lang['ctn_415'] = "Profile Views";
 $lang['ctn_416'] = "Comments";
 $lang['ctn_417'] = "Comments";
@@ -475,7 +475,7 @@ $lang['ctn_427'] = "Facebook Username";
 $lang['ctn_428'] = "Google Username";
 $lang['ctn_429'] = "Linkedin Username";
 
-$lang['ctn_430'] = "Currently Online";
+$lang['ctn_430'] = "Online";
 $lang['ctn_431'] = "Resize Avatar";
 $lang['ctn_432'] = "Selecting this option will attempt to resize any user uploaded avatars to the dimensions you specified above for avatars.";
 $lang['ctn_433'] = "Max Height";
@@ -519,7 +519,8 @@ $lang['ctn_470'] = "Updated Global Settings";
 $lang['ctn_471'] = "User Logs";
 $lang['ctn_472'] = "Action";
 $lang['ctn_473'] = "Back To Login";
-$lang['ctn_474'] = "";
+// sideBar Menü
+$lang['ctn_474'] = "Gösterge";
 $lang['ctn_475'] = "";
 
 
